@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nexus IDE</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    
+    <div class="editor-wrapper">
+        <div id="line-numbers">1</div>
+        <textarea id="editor" placeholder="Start coding..."></textarea>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/editor.js"></script>
+    
+    <script>
+        // Final initialization logic
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedProject = StorageController.loadProject();
+            if (savedProject) {
+                document.getElementById('editor').value = savedProject.code;
+                EditorEngine.updateLines(); // Refresh line count
+            }
+        });
+    </script>
+</body>
+</html>
+
