@@ -1,0 +1,6 @@
+<div id="project-modal" style="display:none; position:fixed; top:20%; left:10%; width:80%; background:#1e293b; padding:1rem; border-radius:1rem;">
+    <h3>Your Files</h3>
+    <ul id="file-list" style="list-style:none; padding:0;"></ul>
+    <input type="text" id="new-file-name" placeholder="filename.js">
+    <button onclick="addNewFile()">Create File</button>
+</div>
