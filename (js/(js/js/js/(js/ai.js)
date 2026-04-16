@@ -1,0 +1,34 @@
+/**
+ * AI Controller
+ * Manages the floating AI assistant panel.
+ */
+const AIController = {
+    panel: document.getElementById('ai-panel'),
+    input: document.getElementById('ai-input'),
+
+    toggle() {
+        this.panel.style.display = this.panel.style.display === 'block' ? 'none' : 'block';
+        if (this.panel.style.display === 'block') this.input.focus();
+    },
+
+    async process() {
+        const query = this.input.value;
+        if (!query) return;
+
+        Terminal.log(`AI: Processing "${query}"...`, 'system');
+        
+        // Simulation of AI interaction
+        setTimeout(() => {
+            const currentCode = document.getElementById('editor').value;
+            // Here you would integrate with an API like Google Gemini
+            const result = `// Refactored via AI: ${query}\n` + currentCode;
+            
+            document.getElementById('editor').value = result;
+            Terminal.log('AI: Code updated successfully.', 'success');
+            this.toggle();
+        }, 1000);
+    }
+};
+
+window.AIController = AIController;
+
