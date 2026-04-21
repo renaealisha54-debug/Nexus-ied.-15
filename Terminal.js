@@ -1,0 +1,22 @@
+/**
+ * terminal.js — Simulated terminal output
+ * Nexus IDE
+ */
+
+const Terminal = {
+    el: document.getElementById('terminal'),
+
+    log(message, type = 'info') {
+        const entry = document.createElement('div');
+        entry.className = `term-line ${type}`;
+        entry.innerHTML = `<span class="prompt">$</span> ${message}`;
+        this.el.appendChild(entry);
+        this.el.scrollTop = this.el.scrollHeight;
+    },
+
+    clear() {
+        this.el.innerHTML = '';
+    }
+};
+
+window.Terminal = Terminal;
