@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus IDE</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+
+    <header class="toolbar">
+        <span class="app-title">Nexus IDE</span>
+        <span id="file-name-display">main.js</span>
+        <button onclick="document.getElementById('project-modal').style.display='block'">Files</button>
+        <button onclick="AIController.toggle()">AI</button>
+    </header>
+
+    <main class="editor-wrapper">
+        <div id="line-numbers">1</div>
+        <textarea id="editor" placeholder="Start coding..."></textarea>
+    </main>
+
+    <!-- Project Modal -->
+    <div id="project-modal" style="display:none; position:fixed; top:20%; left:10%; width:80%; background:#1e293b; padding:1rem; border-radius:1rem; z-index:200;">
+        <h3>Your Files</h3>
+        <ul id="file-list" style="list-style:none; padding:0;"></ul>
+        <input type="text" id="new-file-name" placeholder="filename.js">
+        <button onclick="addNewFile()">Create File</button>
+        <button onclick="document.getElementById('project-modal').style.display='none'">Close</button>
+    </div>
+
+    <!-- AI Panel -->
+    <div id="ai-panel">
+        <input type="text" id="ai-input" placeholder="Ask AI to refactor, debug, or explain...">
+        <button onclick="AIController.process()">Run</button>
+        <button onclick="AIController.toggle()">Close</button>
+    </div>
+
+    <!-- Terminal -->
+    <div id="terminal"></div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/editor.js"></script>
+    <script src="js/terminal.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/ui.js"></script>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedProject = StorageController.loadProject();
+            if (savedProject) {
+                document.getElementById('editor').value = savedProject.code;
+                EditorEngine.updateLines();
+            }
+            Terminal.log('Nexus IDE ready.', 'info');
+        });
+    </script>
+
+</body>
+</html>
